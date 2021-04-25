@@ -7,8 +7,21 @@ module Enumerable
                   else
                     flatten
                   end
-    object_type.size.times do |i|
-      yield object_type[i]
+    object_type.size.times do |index|
+      yield object_type[index]
+    end
+  end
+
+  def my_each_with_index
+    object_type = if instance_of?(Array)
+                    self
+                  elsif instance_of?(Range)
+                    to_a
+                  else
+                    flatten
+                  end
+    object_type.size.times do |index|
+      yield object_type[index], index
     end
   end
 end
