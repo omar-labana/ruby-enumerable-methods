@@ -28,6 +28,11 @@ module Enumerable
   def my_select
     pivot_array = []
     my_each { |element| pivot_array << element if yield element }
-    p pivot_array
+    pivot_array
+  end
+
+  def my_all?
+    my_each { |element| return false if !yield element }
+    true
   end
 end

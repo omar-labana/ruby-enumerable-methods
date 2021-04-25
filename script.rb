@@ -19,5 +19,13 @@ if false
   [1, 2, 3].my_select do |element|
     element != 3
   end
+
+  a = [1, 2, 3].my_all? do |element|
+    element > 4
+  end
 end
-  
+
+a = [1, 2, 3].my_all? do |element|
+  element < 4
+end
+p a
