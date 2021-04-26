@@ -52,9 +52,11 @@ module Enumerable
     count
   end
 
-  def my_map
+  def my_map(proc = nil)
     pivot_array = []
-    my_each { |element| pivot_array << yield(element) }
+    if proc.nil? my_each { |element| pivot_array << yield(element) }
+    else my_each { |element| pivot_array << proc.call(element) }
+    end
     pivot_array
   end
 
