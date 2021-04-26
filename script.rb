@@ -3,19 +3,19 @@ if false
   [1, 2, 3].my_each do |element|
     p element
   end
-  
+
   (1..3).my_each do |element|
     p element
   end
-  
+
   { 1 => 1, 2 => 2, 3 => 3 }.my_each do |element|
     p element
   end
-  
+
   [1, 2, 3].my_each_with_index do |element, index|
     puts element, index
   end
-  
+
   [1, 2, 3].my_select do |element|
     element != 3
   end
@@ -31,7 +31,7 @@ if false
   end
   a = [1, 2, 3].my_none? do |element|
     element == 5
-    end
+  end
   a = [1, 2, 3].my_count do |element|
     element == 5
   end
