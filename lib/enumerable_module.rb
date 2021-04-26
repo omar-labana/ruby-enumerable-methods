@@ -41,3 +41,8 @@ module Enumerable
     false
   end
 end
+
+def my_none?
+    my_each { |element| return false if yield element }
+    true
+end

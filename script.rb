@@ -30,5 +30,7 @@ if false
     element == 5
   end
 end
-
+a = [1, 2, 3].my_none? do |element|
+  element == 5
+end
 p a
