@@ -1,18 +1,18 @@
 require_relative './lib/enumerable_module'
 [1, 2, 3].my_each do |element|
-  p element
+  # p element
 end
 
 (1..3).my_each do |element|
-  p element
+  # p element
 end
 
 { 1 => 1, 2 => 2, 3 => 3 }.my_each do |element|
-  p element
+  # p element
 end
 
 [1, 2, 3].my_each_with_index do |element, index|
-  puts element, index
+  # puts element, index
 end
 
 [1, 2, 3].my_select do |element|
@@ -35,7 +35,12 @@ end
   element == 5
 end
 
-a = [1, 2, 3].my_map do |element|
+[1, 2, 3].my_map do |element|
   element * 2
 end
-puts a
+
+def multiply_els(array)
+  array.my_inject { |element, next_element| element * next_element }
+end
+
+p multiply_els([2,4,5]) 
