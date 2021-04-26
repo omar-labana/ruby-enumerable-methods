@@ -61,6 +61,20 @@ module Enumerable
         pivot_array = []
         my_each { |element| pivot_array << yield(element) }
         p pivot_array
-    end     
+    end
+    
+    def my_inject inject_parameter = nil
+    if inject_parameter
+      total = inject_parameter
+      start_index = 0
+    else
+      total = self.first
+      start_index = 1
+    end
+    self[start_index...self.length].my_each do |element|
+      total = yield(total, element)
+    end
+    total
+end
 
 end
