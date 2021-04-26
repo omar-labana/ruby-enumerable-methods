@@ -46,11 +46,6 @@ module Enumerable
     true
   end
 
-  def my_any?
-    my_each { |element| return true if yield element }
-    false
-  end
-
   def my_count
     count = 0
     my_each { |element| count += 1 if yield element }
