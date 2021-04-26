@@ -40,9 +40,27 @@ module Enumerable
     my_each { |element| return true if yield element }
     false
   end
-end
-
-def my_none?
+  
+  def my_none?
     my_each { |element| return false if yield element }
     true
+  end
+
+    def my_any?
+        my_each { |element| return true if yield element }
+        false
+    end
+
+    def my_count
+        count = 0
+        my_each { |element| count +=1 if yield element }
+        count
+    end
+    
+    def my_map
+        pivot_array = []
+        my_each { |element| pivot_array << yield(element) }
+        p pivot_array
+    end     
+
 end

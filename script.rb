@@ -29,8 +29,14 @@ if false
   a = [1, 2, 3].my_any? do |element|
     element == 5
   end
+  a = [1, 2, 3].my_none? do |element|
+    element == 5
+    end
+  a = [1, 2, 3].my_count do |element|
+    element == 5
+  end
 end
-a = [1, 2, 3].my_none? do |element|
-  element == 5
+a = [1, 2, 3].my_map do |element|
+  element * 2
 end
 p a
