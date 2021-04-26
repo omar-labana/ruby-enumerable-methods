@@ -23,9 +23,12 @@ if false
   a = [1, 2, 3].my_all? do |element|
     element > 4
   end
+  a = [1, 2, 3].my_all? do |element|
+    element < 4
+  end
+  a = [1, 2, 3].my_any? do |element|
+    element == 5
+  end
 end
 
-a = [1, 2, 3].my_all? do |element|
-  element < 4
-end
 p a
