@@ -43,4 +43,4 @@ def multiply_els(array)
   array.my_inject { |element, next_element| element * next_element }
 end
 
-p multiply_els([2,4,5]) 
+p multiply_els([2, 4, 5])

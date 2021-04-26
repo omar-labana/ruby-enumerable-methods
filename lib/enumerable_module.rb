@@ -54,8 +54,10 @@ module Enumerable
 
   def my_map(proc = nil)
     pivot_array = []
-    if proc.nil? my_each { |element| pivot_array << yield(element) }
-    else my_each { |element| pivot_array << proc.call(element) }
+    if proc.nil?
+      my_each { |element| pivot_array << yield(element) }
+    else
+      my_each { |element| pivot_array << proc.call(element) }
     end
     pivot_array
   end
