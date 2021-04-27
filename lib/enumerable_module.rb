@@ -73,7 +73,7 @@ module Enumerable
     end
   end
 
-  def my_none?(pattern = nill, &block)
+  def my_none?(pattern = nil, &block)
     !my_any?(pattern, &block)
   end
 
