@@ -1,15 +1,17 @@
 module Enumerable
   def my_each
-    object_type = if instance_of?(Array)
-                    self
-                  elsif instance_of?(Range)
-                    to_a
-                  else
-                    flatten
-                  end
-    object_type.size.times do |index|
-      yield object_type[index]
+    return to_enum(:my_each) unless block_given?
+
+    self.size.times do |index|
+      if is_a?(Array)
+        yield(self[index])
+      elsif is_a?(Hash)
+        yield(keys[index], self[keys[index]])
+      elsif is_a?(Range)
+        yield(to_a[index])
+      end
     end
+    self
   end
 
   def my_each_with_index
