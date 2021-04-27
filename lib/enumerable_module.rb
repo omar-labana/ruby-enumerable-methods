@@ -88,6 +88,7 @@ module Enumerable
 
   def my_map(proc = nil)
     return to_enum unless block_given? || proc
+
     pivot_array = []
     if proc.nil?
       my_each { |element| pivot_array << yield(element) }
@@ -97,9 +98,10 @@ module Enumerable
     pivot_array
   end
 
-  def my_inject(inject_parameter = nil)
-    return my_map { |element| proc.call(element) } unless proc 
-    # TODO 
+  def my_inject(_inject_parameter = nil)
+    return my_map { |element| proc.call(element) } unless proc
+
+    # TODO
     if block_given?
       total = []
       my_each { |element| total.push(yield(element)) }
