@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    self.size.times do |index|
+    size.times do |index|
       if is_a?(Array)
         yield(self[index])
       elsif is_a?(Hash)
