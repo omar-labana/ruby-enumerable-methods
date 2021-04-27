@@ -1,3 +1,5 @@
+# rubocop: disable Metrics/ModuleLength
+
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -55,14 +57,38 @@ module Enumerable
     end
   end
 
-  def my_any?
-    my_each { |element| return true if yield element }
-    false
+  def my_any?(pattern = nil)
+    return my_all?(pattern) { |void| void } unless block_given?
+
+    # regex control
+    case pattern
+
+    when Regexp
+      my_all? { |element| element.match(pattern) }
+    when Class
+      my_all? { |element| element.is_a? pattern }
+    when nil
+      my_each { |element| return true unless yield(element) }
+      false
+    else
+      my_all? { |element| element == pattern }
+    end
   end
 
-  def my_none?
-    my_each { |element| return false if yield element }
-    true
+  def my_none?(pattern = nill)
+    return my_any?(pattern) { |v| v } unless block_given?
+
+    case pattern
+    when Regexp
+      my_any? { |element| element.match(pattern) }
+    when Class
+      my_any? { |element| element.is_a? pattern }
+    when NO_ARGUMENT
+      my_each { |element| return true if yield(element) }
+      false
+    else
+      my_any? { |element| element == pattern }
+    end
   end
 
   def my_count
