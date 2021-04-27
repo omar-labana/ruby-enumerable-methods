@@ -87,6 +87,7 @@ module Enumerable
   end
 
   def my_map(proc = nil)
+    return to_enum unless block_given? || proc
     pivot_array = []
     if proc.nil?
       my_each { |element| pivot_array << yield(element) }
