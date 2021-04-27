@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    self.size.times do |index|
+    size.times do |index|
       if is_a?(Array)
         yield(self[index])
       elsif is_a?(Hash)
@@ -15,19 +15,23 @@ module Enumerable
   end
 
   def my_each_with_index
-    object_type = if instance_of?(Array)
-                    self
-                  elsif instance_of?(Range)
-                    to_a
-                  else
-                    flatten
-                  end
-    object_type.size.times do |index|
-      yield object_type[index], index
+    return to_enum(:my_each_with_index) unless block_given?
+
+    size.times do |index|
+      if is_a?(Array)
+        yield(self[index], index)
+      elsif is_a?(Hash)
+        yield(keys[index], self[keys[index]])
+      elsif is_a?(Range)
+        yield(to_a[index], index)
+      end
     end
+    self
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     pivot_array = []
     my_each { |element| pivot_array << element if yield element }
     pivot_array

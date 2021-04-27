@@ -1,8 +1,4 @@
 require_relative './lib/enumerable_module'
-
-(1..3).each do |element|
-  p element *= 3
-end  
-(1..3).my_each do |element|
-  p element *= 3
+[1, 2, 3].my_each_with_index do |element, index|
+  p element, index
 end
