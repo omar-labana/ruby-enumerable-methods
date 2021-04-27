@@ -102,14 +102,12 @@ module Enumerable
     # TODO 
     if block_given?
       total = []
-      start_index = 0
+      my_each { |element| total.push(yield(element)) }
+      total
     else
-      total = first
-      start_index = 1
+      Enumerator.new { |element| my_map { |accu| element << accu } }
     end
-    self[start_index...length].my_each do |element|
-      total = yield(total, element)
-    end
+
     total
   end
 end
