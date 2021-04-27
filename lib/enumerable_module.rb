@@ -98,8 +98,10 @@ module Enumerable
   end
 
   def my_inject(inject_parameter = nil)
-    if inject_parameter
-      total = inject_parameter
+    return my_map { |element| proc.call(element) } unless proc 
+    # TODO 
+    if block_given?
+      total = []
       start_index = 0
     else
       total = first
