@@ -37,9 +37,22 @@ module Enumerable
     pivot_array
   end
 
-  def my_all?
-    my_each { |element| return false unless yield element }
-    true
+  def my_all?(pattern = nil)
+    return my_all?(pattern) { |void| void } unless block_given?
+
+    # regex control
+    case pattern
+
+    when Regexp
+      my_all? { |element| element.match(pattern) }
+    when Class
+      my_all? { |element| element.is_a? pattern }
+    when nil
+      my_each { |element| return false unless yield(element) }
+      true
+    else
+      my_all? { |element| element == pattern }
+    end
   end
 
   def my_any?
