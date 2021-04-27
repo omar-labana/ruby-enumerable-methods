@@ -75,20 +75,8 @@ module Enumerable
     end
   end
 
-  def my_none?(pattern = nill)
-    return my_any?(pattern) { |v| v } unless block_given?
-
-    case pattern
-    when Regexp
-      my_any? { |element| element.match(pattern) }
-    when Class
-      my_any? { |element| element.is_a? pattern }
-    when NO_ARGUMENT
-      my_each { |element| return true if yield(element) }
-      false
-    else
-      my_any? { |element| element == pattern }
-    end
+  def my_none?(pattern = nill, &block)
+    !my_any?(pattern, &block)
   end
 
   def my_count
