@@ -77,9 +77,12 @@ module Enumerable
     !my_any?(pattern, &block)
   end
 
-  def my_count
+  def my_count(pivot = nil)
+    arr = instance_of?(Array) ? self : to_a
+    return arr.length unless block_given? || pivot
+
     count = 0
-    my_each { |element| count += 1 if yield element }
+    arr.my_each { |element| count += 1 if yield element }
     count
   end
 
