@@ -89,10 +89,11 @@ module Enumerable
     return to_enum unless block_given? || proc
 
     pivot_array = []
-    if proc.nil?
-      my_each { |element| pivot_array << yield(element) }
-    else
-      my_each { |element| pivot_array << proc.call(element) }
+      if proc.nil?
+        my_each { |element| pivot_array << yield(element) }
+      else
+        my_each { |element| pivot_array << proc.call(element) }
+      end
     end
     pivot_array
   end
@@ -113,8 +114,9 @@ module Enumerable
     control
   end
 end
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
 def multiply_els(array)
   array.my_inject(1) { |count, value| count * value }
 end
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
