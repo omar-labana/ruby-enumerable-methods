@@ -1,33 +1,20 @@
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
-
-    size.times do |index|
-      if is_a?(Array)
-        yield(self[index])
-      elsif is_a?(Hash)
-        yield(keys[index], self[keys[index]])
-      elsif is_a?(Range)
-        yield(to_a[index])
-      end
+    return to_a(:my_each) unless block_given?
+    array = self.to_a 
+    array.count.times do |index|
+        yield(array[index])
     end
     self
   end
 
   def my_each_with_index
-    return to_enum(:my_each_with_index) unless block_given?
-
-    size.times do |index|
-      if is_a?(Array)
-        yield(self[index], index)
-      elsif is_a?(Hash)
-        yield(keys[index], self[keys[index]])
-      elsif is_a?(Range)
-        yield(to_a[index], index)
-      end
+    return to_a(:my_each_with_index) unless block_given?
+    array = self.to_a 
+    array.count.times do |index|
+        yield(array[index], index)
     end
-    self
-  end
+    self  end
 
   def my_select
     return to_enum(:my_select) unless block_given?
