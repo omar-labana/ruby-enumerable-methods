@@ -30,10 +30,12 @@ module Enumerable
   end
 
   def my_select
-    return to_enum(:my_each) unless block_given?
+    return to_enum(:my_select) unless block_given?
 
     pivot_array = []
-    my_each { |element| pivot_array.push if yield(element) }
+    my_each do |array_element|
+      pivot_array << array_element if yield(array_element)
+    end
     pivot_array
   end
 
@@ -104,7 +106,6 @@ module Enumerable
     else
       Enumerator.new { |element| my_map { |accu| element << accu } }
     end
-
     total
   end
 end
