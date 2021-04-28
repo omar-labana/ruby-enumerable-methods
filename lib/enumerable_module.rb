@@ -61,7 +61,7 @@ module Enumerable
     valid = false
 
     if !pattern[0].nil?
-      my_each { |element| valid = true if pattern[0]===element }
+      my_each { |element| valid = true if pattern[0] == element }
     elsif !block_given?
       my_each { |element| valid = true if element }
     else
