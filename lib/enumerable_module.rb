@@ -1,20 +1,23 @@
 module Enumerable
   def my_each
     return to_a(:my_each) unless block_given?
-    array = self.to_a 
+
+    array = to_a
     array.count.times do |index|
-        yield(array[index])
+      yield(array[index])
     end
     self
   end
 
   def my_each_with_index
     return to_a(:my_each_with_index) unless block_given?
-    array = self.to_a 
+
+    array = to_a
     array.count.times do |index|
-        yield(array[index], index)
+      yield(array[index], index)
     end
-    self  end
+    self
+  end
 
   def my_select
     return to_enum(:my_select) unless block_given?
