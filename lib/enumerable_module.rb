@@ -70,7 +70,7 @@ module Enumerable
     !my_any?(pattern, &block)
   end
 
-  def my_count(pivot)
+  def my_count(*pivot)
     return to_a.size unless block_given?
 
     count = 0
