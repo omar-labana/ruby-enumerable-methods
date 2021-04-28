@@ -81,7 +81,7 @@ module Enumerable
   end
 
   def my_map(proc = nil)
-    return to_enum unless block_given? || proc
+      return to_enum unless block_given? || proc
 
     pivot_array = []
     if proc.nil?
