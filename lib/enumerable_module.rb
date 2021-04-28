@@ -70,25 +70,25 @@ module Enumerable
     !my_any?(pattern, &block)
   end
 
-  def my_count(pivot = nil)
-   return to_a.size unless block_given?
+  def my_count(pivot)
+    return to_a.size unless block_given?
 
-   count = 0
-   if pivot
-    my_each do |element|
-      count += 1 if element == pivot
+    count = 0
+    if pivot
+      my_each do |element|
+        count += 1 if element == pivot
+      end
+    else
+      my_each do |element|
+        count += 1 if yield element
+      end
+      count
     end
-  else
-    my_each do |element|
-      count += 1 if yield element
-    end
-    count
-  end
 
-  def my_map(proc = nil)
-    return to_enum unless block_given? || proc
+    def my_map(proc = nil)
+      return to_enum unless block_given? || proc
 
-    pivot_array = []
+      pivot_array = []
       if proc.nil?
         my_each { |element| pivot_array << yield(element) }
       else
@@ -119,4 +119,3 @@ def multiply_els(array)
   array.my_inject(1) { |count, value| count * value }
 end
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-
