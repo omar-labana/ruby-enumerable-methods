@@ -95,15 +95,14 @@ module Enumerable
   def my_inject(control = nil, block = nil)
     block, control = control, nil if (!control.nil? && block.nil?) && (control.is_a?(Symbol) || control.is_a?(String))
     # TODO
-
-    if block_given?
-      total = []
-      my_each { |element| total.push(yield(element)) }
-      total
+    if !block_given? && !block.nil?
+      p !block_given? && !block.nil?
+      to_a.my_each { |element| control = control.nil? ? element : control.send(block, element) }
     else
-      Enumerator.new { |element| my_map { |accu| element << accu } }
+    # TODO TEST #1 #2
+      to_a.my_each { |element| control = control.nil? ? element : yield(control, element) }
     end
-    total
+    control
   end
 end
 
