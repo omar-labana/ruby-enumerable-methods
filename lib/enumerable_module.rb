@@ -92,10 +92,10 @@ module Enumerable
     pivot_array
   end
 
-  def my_inject(_inject_parameter = nil)
-    return my_map { |element| proc.call(element) } unless proc
-
+  def my_inject(control = nil, block = nil)
+    block, control = control, nil if (!control.nil? && block.nil?) && (control.is_a?(Symbol) || control.is_a?(String))
     # TODO
+
     if block_given?
       total = []
       my_each { |element| total.push(yield(element)) }
