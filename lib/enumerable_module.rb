@@ -1,6 +1,6 @@
 module Enumerable
   def my_each
-    return to_a(:my_each) unless block_given?
+    return to_enum(:my_each) unless block_given?
 
     array = to_a
     array.count.times do |index|
@@ -10,7 +10,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return to_a(:my_each_with_index) unless block_given?
+    return to_enum(:my_each_with_index) unless block_given?
 
     array = to_a
     array.count.times do |index|
@@ -47,17 +47,22 @@ module Enumerable
     end
   end
 
-  def my_any?(*pattern)
-    valid = false
+  def my_any?(pattern = nil)
+    return my_any?(pattern) { |value| value } unless block_given?
 
-    if !pattern[0].nil?
-      my_each { |element| valid = true if pattern[0] == element }
-    elsif !block_given?
-      my_each { |element| valid = true if element }
+    case pattern
+    when Regexp
+      # TODO
+      my_any? { |value| value.match(pattern) }
+    when Class
+      # TODO
+      my_any? { |value| value.is_a? pattern }
+    when nil
+      my_each { |value| return true if yield(value) }
+      false
     else
-      my_each { |element| valid = true if yield(element) }
+      my_any? { |value| value == pattern }
     end
-    valid
   end
 
   def my_none?(pattern = nil, &block)
