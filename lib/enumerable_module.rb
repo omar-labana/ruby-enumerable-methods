@@ -73,9 +73,11 @@ module Enumerable
     arr = instance_of?(Array) ? self : to_a
     return arr.length unless block_given? || pivot
 
-    count = 0
-    arr.my_each { |element| count += 1 if yield element }
-    count
+    if pivot
+      return arr.my_select { |item| item == pivot }.length
+    else
+      return arr.my_select { |item| item == pivot }.length
+    end
   end
 
   def my_map(proc = nil)
