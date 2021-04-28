@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -73,11 +74,7 @@ module Enumerable
     arr = instance_of?(Array) ? self : to_a
     return arr.length unless block_given? || pivot
 
-    if pivot
-      return arr.my_select { |item| item == pivot }.length
-    else
-      return arr.my_select { |item| item == pivot }.length
-    end
+    arr.my_select { |item| item == pivot }.length if pivot
   end
 
   def my_map(proc = nil)
@@ -93,13 +90,16 @@ module Enumerable
   end
 
   def my_inject(control = nil, block = nil)
-    block, control = control, nil if (!control.nil? && block.nil?) && (control.is_a?(Symbol) || control.is_a?(String))
+    if (!control.nil? && block.nil?) && (control.is_a?(Symbol) || control.is_a?(String))
+      block = control
+      control = nil
+    end
     # TODO
     if !block_given? && !block.nil?
       p !block_given? && !block.nil?
       to_a.my_each { |element| control = control.nil? ? element : control.send(block, element) }
     else
-    # TODO TEST #1 #2
+      # TODO: TEST #1 #2
       to_a.my_each { |element| control = control.nil? ? element : yield(control, element) }
     end
     control
@@ -109,3 +109,4 @@ end
 def multiply_els(array)
   array.my_inject(1) { |count, value| count * value }
 end
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
