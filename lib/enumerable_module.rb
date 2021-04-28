@@ -82,8 +82,7 @@ module Enumerable
     my_each do |element|
       count += 1 if yield element
     end
-  end
-  count
+    count
   end
 
   def my_map(proc = nil)
