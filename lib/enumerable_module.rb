@@ -96,3 +96,7 @@ module Enumerable
     total
   end
 end
+
+def multiply_els(array)
+  array.my_inject(1) { |count, value| count * value }
+end
