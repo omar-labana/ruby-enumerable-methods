@@ -112,9 +112,9 @@ module Enumerable
     end
     control
   end
-
-  def multiply_els(array)
-    array.my_inject(1) { |count, value| count * value }
-  end
-  # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 end
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+def multiply_els(array)
+  array.my_inject(1) { |count, value| count * value }
+end
+
