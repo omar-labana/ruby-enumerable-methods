@@ -30,10 +30,10 @@ module Enumerable
   end
 
   def my_select
-    return to_enum(:my_select) unless block_given?
+    return to_enum(:my_each) unless block_given?
 
     pivot_array = []
-    my_each { |element| pivot_array << element if yield element }
+    my_each { |element| pivot_array.push if yield(element) }
     pivot_array
   end
 
@@ -55,22 +55,17 @@ module Enumerable
     end
   end
 
-  def my_any?(pattern = nil)
-    return my_all?(pattern) { |void| void } unless block_given?
+  def my_any?(*pattern)
+    valid = false
 
-    # regex control
-    case pattern
-
-    when Regexp
-      my_all? { |element| element.match(pattern) }
-    when Class
-      my_all? { |element| element.is_a? pattern }
-    when nil
-      my_each { |element| return true unless yield(element) }
-      false
+    if !pattern[0].nil?
+      my_each { |element| valid = true if pattern[0]===element }
+    elsif !block_given?
+      my_each { |element| valid = true if element }
     else
-      my_all? { |element| element == pattern }
+      my_each { |element| valid = true if yield(element) }
     end
+    valid
   end
 
   def my_none?(pattern = nil, &block)
