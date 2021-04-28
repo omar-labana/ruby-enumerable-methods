@@ -71,10 +71,19 @@ module Enumerable
   end
 
   def my_count(pivot = nil)
-    arr = instance_of?(Array) ? self : to_a
-    return arr.length unless block_given? || pivot
+   return to_a.size unless block_given?
 
-    arr.my_select { |item| item == pivot }.length if pivot
+   count = 0
+   if pivot
+    my_each do |element|
+      count += 1 if element == pivot
+    end
+  else
+    my_each do |element|
+      count += 1 if yield element
+    end
+  end
+  count
   end
 
   def my_map(proc = nil)
