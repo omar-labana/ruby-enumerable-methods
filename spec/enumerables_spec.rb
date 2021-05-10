@@ -9,5 +9,12 @@ describe Enumerable do
         .to eql(array.each { |item| item += 1 })
     end
   end
+
+  describe '#my_each_with_index' do
+    it 'maps each object element to given block along with its index' do
+      expect(array.my_each_with_index { |item, index| item += index })
+        .to eql(array.each_with_index { |item, index| item += index })
+    end
+  end
 end
 # rubocop:enable Lint/UselessAssignment
