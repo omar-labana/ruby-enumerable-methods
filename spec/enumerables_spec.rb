@@ -45,8 +45,8 @@ describe Enumerable do
   end
   describe '#my_count' do
     it 'maps a block to a given object to count elements that satisfy the block logic' do
-      expect(array.my_count { |item| item % 2 == 0 })
-        .to eql(array.count { |item| item % 2 == 0 })
+      expect(array.my_count { |item| item % 3 == 0 })
+        .to eql(array.count { |item| item % 3 == 0 })
     end
   end
 
