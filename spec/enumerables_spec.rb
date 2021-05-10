@@ -55,6 +55,12 @@ describe Enumerable do
         .to eql(array.map { |item| item + 1 })
     end
   end
+  describe '#my_inject' do
+    it 'maps a block to a given object to count elements that satisfy the block logic' do
+      expect(array.my_inject(:+))
+        .to eql(array.inject(:+))
+    end
+  end
 
 end
 # rubocop:enable Lint/UselessAssignment
