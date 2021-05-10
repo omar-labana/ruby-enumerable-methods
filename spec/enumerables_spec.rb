@@ -53,7 +53,6 @@ describe Enumerable do
     it 'maps a block to a given object to count elements that satisfy the block logic' do
       expect(array.my_map { |item| item + 1 })
         .to eql(array.map { |item| item + 1 })
-      puts array.my_map
     end
   end
 
