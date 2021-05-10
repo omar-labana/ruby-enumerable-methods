@@ -49,6 +49,13 @@ describe Enumerable do
         .to eql(array.count { |item| item % 3 == 0 })
     end
   end
+  describe '#my_map' do
+    it 'maps a block to a given object to count elements that satisfy the block logic' do
+      expect(array.my_map { |item| item + 1 })
+        .to eql(array.map { |item| item + 1 })
+      puts array.my_map
+    end
+  end
 
 end
 # rubocop:enable Lint/UselessAssignment
