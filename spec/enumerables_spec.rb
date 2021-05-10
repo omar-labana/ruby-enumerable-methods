@@ -32,10 +32,17 @@ describe Enumerable do
   end
 
   describe '#my_any' do
-    it 'maps a block to a given object to check if elements don\'t satisfy the block logic' do
+    it 'maps a block to a given object to check if any element satisfies the block logic' do
       expect(array.my_any? { |item| item > 0 })
         .to eql(array.any? { |item| item > 0 })
     end
   end
+  describe '#my_none' do
+    it 'maps a block to a given object to check if elements don\'t satisfy the block logic' do
+      expect(array.my_none? { |item| item % 2 == 0 })
+        .to eql(array.none? { |item| item % 2 == 0 })
+    end
+  end
+
 end
 # rubocop:enable Lint/UselessAssignment
