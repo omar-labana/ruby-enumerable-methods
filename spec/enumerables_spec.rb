@@ -19,8 +19,15 @@ describe Enumerable do
 
   describe '#my_select' do
     it 'maps a block to a given object to select elements satisfying the block logic' do
-      expect(array.my_select{ |item| item > 1 })
+      expect(array.my_select { |item| item > 1 })
         .to eql(array.select { |item| item > 1 })
+    end
+  end
+
+  describe '#my_all' do
+    it 'maps a block to a given object to check if elements satisfy the block logic' do
+      expect(array.my_all? { |item| item > 0 })
+        .to eql(array.all? { |item| item > 0 })
     end
   end
 end
