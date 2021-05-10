@@ -1,8 +1,7 @@
-# spec/calculator_spec.rb
 # rubocop:disable Lint/UselessAssignment
 require_relative '../lib/enumerable_module'
-array = [1, 2, 3, 4, 5]
 describe Enumerable do
+  let(:array) { [-3, -2, -1, 0, 1, 2, 3, 4, 5] }
   describe '#my_each' do
     it 'maps a block to a given object' do
       expect(array.my_each { |item| item += 1 })
@@ -47,6 +46,12 @@ describe Enumerable do
     it 'maps a block to a given object to count elements that satisfy the block logic' do
       expect(array.my_count { |item| item % 3 == 0 })
         .to eql(array.count { |item| item % 3 == 0 })
+    end
+  end
+  describe '#my_count' do
+    it 'maps a block to a given object to count elements that satisfy the block logic' do
+      expect(array.my_count { |item| item < 0 })
+        .to eql(array.count { |item| item < 0 })
     end
   end
   describe '#my_map' do

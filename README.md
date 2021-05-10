@@ -13,9 +13,10 @@ Additional description about the project and its features.
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
+You can install rspec using the gem install commad: 
+`$ gem install rspec`
+and then you can run respec using:
+`$ rspec`
 ## Authors
 
 👤 **Author1**
