@@ -39,8 +39,8 @@ describe Enumerable do
   end
   describe '#my_none' do
     it 'maps a block to a given object to check if elements don\'t satisfy the block logic' do
-      expect(array.my_none? { |item| item % 2 == 0 })
-        .to eql(array.none? { |item| item % 2 == 0 })
+      expect(array.my_none?(&:even?))
+        .to eql(array.none?(&:even?))
     end
   end
   describe '#my_count' do
@@ -56,11 +56,10 @@ describe Enumerable do
     end
   end
   describe '#my_inject' do
-    it 'maps a block to a given object to count elements that satisfy the block logic' do
+    it 'maps a block to a given object to merge elements following the given logic' do
       expect(array.my_inject(:+))
         .to eql(array.inject(:+))
     end
   end
-
 end
 # rubocop:enable Lint/UselessAssignment
