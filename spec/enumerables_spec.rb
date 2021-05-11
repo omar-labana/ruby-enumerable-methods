@@ -3,8 +3,8 @@ describe Enumerable do
   let(:array) { [-3, -2, -1, 0, 1, 2, 3, 4, 5] }
   describe '#my_each' do
     it 'maps a block to a given object' do
-      expect(array.my_each { |item| item > 1 })
-        .to eql(array.each { |item| item > 1 })
+      expect(array.my_each { |item| item <= 1 })
+        .to eql(array.each { |item| item <= 1 })
     end
   end
 
