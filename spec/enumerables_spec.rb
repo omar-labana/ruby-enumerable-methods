@@ -1,4 +1,3 @@
-# rubocop:disable Lint/UselessAssignment
 require_relative '../lib/enumerable_module'
 describe Enumerable do
   let(:array) { [-3, -2, -1, 0, 1, 2, 3, 4, 5] }
@@ -67,4 +66,3 @@ describe Enumerable do
     end
   end
 end
-# rubocop:enable Lint/UselessAssignment
